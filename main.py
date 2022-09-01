@@ -37,13 +37,13 @@ def on_forever():
     sonar()
     if irany == 0:
         basic.show_arrow(ArrowNames.WEST)
-        Rover.steer(eDirection.LEFT, 90)
+        Rover.steer(eDirection.LEFT, 30)
     elif irany == 1:
         basic.show_arrow(ArrowNames.SOUTH)
-        Rover.steer(eDirection.LEFT, 180)
+        Rover.steer(eDirection.LEFT, 60)
     elif irany == 2:
         basic.show_arrow(ArrowNames.EAST)
-        Rover.steer(eDirection.RIGHT, 90)
+        Rover.steer(eDirection.RIGHT, 30)
     else:
         basic.show_arrow(ArrowNames.NORTH)
     Rover.move_milli(eVector.FORWARD, 60, 400)
