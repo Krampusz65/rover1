@@ -6,7 +6,7 @@
         "core": "*",
         "radio": "*",
         "microphone": "*",
-        "MARS-Rover": "github:4tronix/MARS-Rover#91c6e903f0db9727919f4544a18012a42d70a4b0"
+        "MARS-Rover": "github:4tronix/mars-rover#91c6e903f0db9727919f4544a18012a42d70a4b0"
     },
     "files": [
         "main.blocks",
@@ -24,5 +24,5 @@
     "supportedTargets": [
         "microbit"
     ],
-    "preferredEditor": "pyprj"
+    "preferredEditor": "blocksprj"
 }

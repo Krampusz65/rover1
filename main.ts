@@ -1,30 +1,15 @@
-function sonar() {
-    
-    Rover.setServo(Rover.getServoNumber(eServos.Mast), -90)
-    fok = Rover.readSonar(ePingUnit.Centimeters)
-    if (fok < 25) {
-        irany = 0
+function sonar () {
+    Rover.setServo(Rover.getServoNumber(eServos.Mast), -45)
+    if (Rover.readSonar(ePingUnit.Centimeters) < 25) {
+        Rover.steer(eDirection.Left, 45)
     }
-    
-    basic.pause(500)
-    Rover.setServo(Rover.getServoNumber(eServos.Mast), 90)
-    fok = Rover.readSonar(ePingUnit.Centimeters)
-    if (fok < 25) {
-        irany = 1
+    basic.pause(1000)
+    Rover.setServo(Rover.getServoNumber(eServos.Mast), 45)
+    if (Rover.readSonar(ePingUnit.Centimeters) < 25) {
+        Rover.steer(eDirection.Right, 45)
     }
-    
-    basic.pause(500)
-    Rover.setServo(Rover.getServoNumber(eServos.Mast), 0)
-    fok = Rover.readSonar(ePingUnit.Centimeters)
-    if (fok < 25) {
-        irany = 2
-    }
-    
+    basic.pause(1000)
 }
-
-let tavolsag = 0
-let irany = 0
-let fok = 0
 Rover.clearOffsets()
 Rover.setLedColor(0xFF0000)
 basic.showIcon(IconNames.Heart)
@@ -35,25 +20,19 @@ basic.pause(100)
 Rover.steer(eDirection.Right, 30)
 basic.pause(100)
 Rover.setLedColor(0x659900)
-sonar()
+Rover.setServo(Rover.getServoNumber(eServos.Mast), -90)
+basic.pause(1000)
+Rover.setServo(Rover.getServoNumber(eServos.Mast), 0)
+basic.pause(1000)
+Rover.setServo(Rover.getServoNumber(eServos.Mast), 90)
 basic.showIcon(IconNames.Happy)
-basic.forever(function on_forever() {
-    
+basic.forever(function () {
     Rover.zeroServos(eServoGroup.Mast)
-    tavolsag = Rover.readSonar(ePingUnit.Centimeters)
-    sonar()
-    if (irany == 0) {
-        basic.showArrow(ArrowNames.West)
-        Rover.steer(eDirection.Left, 30)
-    } else if (irany == 1) {
-        basic.showArrow(ArrowNames.South)
-        Rover.steer(eDirection.Left, 60)
-    } else if (irany == 2) {
-        basic.showArrow(ArrowNames.East)
-        Rover.steer(eDirection.Right, 30)
+    if (Rover.readSonar(ePingUnit.Centimeters) > 25) {
+        Rover.move_milli(eVector.Forward, 60, 400)
     } else {
-        basic.showArrow(ArrowNames.North)
+        sonar()
     }
-    
+    Rover.zeroServos(eServoGroup.Mast)
     Rover.move_milli(eVector.Forward, 60, 400)
 })
